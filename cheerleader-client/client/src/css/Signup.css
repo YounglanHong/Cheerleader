@@ -1,0 +1,36 @@
+.signup {
+  text-align: center;
+}
+
+.title {
+  font-weight: bold;
+}
+
+.input_contants {
+  width: 300px;
+  height: 30px;
+  margin: 10px;
+  border-radius: 5px;
+}
+
+.feedback {
+  font-weight: lighter;
+  font-style: italic;
+  font-size: 10pt;
+  color: red;
+}
+
+div.Buttens_frame {
+  margin: 40px;
+}
+
+.button {
+  width: 120px;
+  height: 40px;
+  margin: 10px;
+  border-radius: 5px;
+  font-size: 15px;
+  font-weight: bold;
+  background-color: lightblue;
+  cursor: pointer;
+}

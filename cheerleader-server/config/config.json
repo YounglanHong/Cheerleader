@@ -1,0 +1,29 @@
+{
+  "development": {
+    "username": "console",
+    "password": "FIX_ME",
+    "database": "cheerleader_database",
+    "host": "cheerleader-database.crbxrlwpqfog.ap-northeast-2.rds.amazonaws.com",
+    "dialect": "mysql",
+    "operatorsAliases": false,
+    "port": 23306
+  },
+  "test": {
+    "username": "console",
+    "password": "FIX_ME",
+    "database": "cheerleader_database",
+    "host": "cheerleader-database.crbxrlwpqfog.ap-northeast-2.rds.amazonaws.com",
+    "dialect": "mysql",
+    "operatorsAliases": false,
+    "port": 23306
+  },
+  "production": {
+    "username": "console",
+    "password": "FIX_ME",
+    "database": "cheerleader_database",
+    "host": "cheerleader-database.crbxrlwpqfog.ap-northeast-2.rds.amazonaws.com",
+    "dialect": "mysql",
+    "operatorsAliases": false,
+    "port": 23306
+  }
+}
