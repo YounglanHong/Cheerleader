@@ -10,6 +10,8 @@
    ![로그인](./로그인.gif)
    ![메세지페이지](./메세지페이지.gif)
    ![로그아웃,회원탈퇴](./로그아웃&회원탈퇴.gif)
+   
+   #### ※ 프로젝트 URL http://cheerleader-client.s3-website.ap-northeast-2.amazonaws.com/
 
   ### 2. 주요 기능
   * 회원가입 & 회원탈퇴
