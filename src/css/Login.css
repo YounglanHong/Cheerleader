@@ -1,0 +1,40 @@
+.login {
+  text-align: center;
+}
+.input_email {
+  width: 300px;
+  height: 30px;
+  margin: 10px;
+  border-radius: 5px;
+}
+
+.input_password {
+  width: 300px;
+  height: 30px;
+  margin: 10px;
+  border-radius: 5px;
+}
+
+.to_Signupbutton {
+  width: 120px;
+  height: 40px;
+  margin: 10px;
+  border-radius: 5px;
+  font-size: 15px;
+  font-weight: bold;
+  background-color: lightblue;
+  cursor: pointer;
+}
+.login_button {
+  width: 120px;
+  height: 40px;
+  margin: 10px;
+  border-radius: 5px;
+  font-size: 15px;
+  font-weight: bold;
+  background-color: lightblue;
+  cursor: pointer;
+}
+.SignupButton_Frame {
+  padding: 20px;
+}
