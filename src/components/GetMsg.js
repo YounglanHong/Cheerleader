@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
-import axios from 'axios';
 
 import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
@@ -18,7 +17,8 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { green } from '@material-ui/core/colors';
 import { grey } from '@material-ui/core/colors';
 
-axios.defaults.withCredentials = true;
+//* firebase
+import database from '../firebase';
 
 /******************** material-ui/style ************************/
 // style
@@ -49,8 +49,8 @@ const useStyles = makeStyles((theme) => ({
   cardDate: {
     fontSize: 15,
     fontStyle: 'italic',
-    float: 'right',
     padding: '20px',
+    margin: '20px 10px 10px 0px',
     color: grey[500],
   },
   cardButton: {
@@ -71,7 +71,7 @@ const theme = createMuiTheme({
 
 // GetMsg
 function GetMsg({ history }) {
-  const [text, setText] = useState('');
+  const [message, setMessage] = useState('');
   const [date, setDate] = useState('');
 
   // media query
@@ -89,17 +89,25 @@ function GetMsg({ history }) {
   };
 
   useEffect(() => {
-    axios({
-      method: 'get',
-      url: 'http://15.164.164.204:4000/message/getMessage',
-    }).then((res) => {
-      setText(res.data.data.inputText);
-      setDate(res.data.data.createdAt);
+    let messageRef = database.ref('messages');
+
+    messageRef.on('value', (snapshot) => {
+      let values = Object.values(snapshot.val());
+      if (snapshot) {
+        return values.map((data, i) => {
+          let random_index = Math.floor(Math.random() * (i + 1));
+          return (
+            setMessage(values[random_index].message),
+            setDate(new Date(values[random_index].createdAt).toDateString())
+          );
+        });
+      }
     });
   }, []);
   // }, [text]);
 
   const classes = useStyles();
+
   return (
     <div className="GetMsg">
       <ThemeProvider theme={theme}>
@@ -113,9 +121,9 @@ function GetMsg({ history }) {
                 style={matches ? md_style : sm_style}
               >
                 <Box className={classes.cardText} name="contents">
-                  {text}
+                  {message}
                 </Box>
-                <Box name="created_at">{date.slice(0, 10)}</Box>
+                <Box className={classes.cardDate}>{date}</Box>
               </CardContent>
 
               <CardActions>

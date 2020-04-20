@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { withRouter } from 'react-router-dom';
-import axios from 'axios';
 
 import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
@@ -15,7 +14,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 
-axios.defaults.withCredentials = true;
+//* firebase
+import * as firebase from 'firebase/app';
+import database from '../firebase';
 
 /******************** material-ui/style ************************/
 // style
@@ -65,24 +66,24 @@ function SendMsg({ history }) {
     if (e.target.value.length <= 150) {
       setValue(e.target.value);
       setCount(e.target.value.length);
-      console.log(value);
     }
   }
 
+  //* 응원메세지 DB 등록
   function handleSubmit() {
-    axios({
-      method: 'post',
-      url: 'http://15.164.164.204:4000/message/sendMessage',
-      data: {
-        inputText: value,
-      },
-    }).then((res) => {
-      if (res.data.id) {
-        history.push('/getMsg');
-      } else {
-        alert('중복되는 메세지가 있습니다.');
-      }
-    });
+    database
+      .ref('messages')
+      .push({
+        message: value,
+        createdAt: firebase.database.ServerValue.TIMESTAMP,
+      })
+      .then((res) => {
+        if (res.key) {
+          history.push('/getMsg');
+        } else {
+          alert('중복되는 메세지가 있습니다.');
+        }
+      });
   }
 
   // 뒤로가기
