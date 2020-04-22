@@ -29,19 +29,19 @@ const useStyles = makeStyles((theme) => ({
 
 /***************************************************************/
 
-function Modal({
-  isLogged,
+function AccountModal({
+  isLogin,
   username,
   email,
   history,
-  handleSignout,
+  handleWithdrawal,
   modal,
   handleCloseModal,
 }) {
   const classes = useStyles();
   return (
-    <div className="Modal">
-      {isLogged ? (
+    <div className="AccountModal">
+      {isLogin ? (
         <Dialog open={modal} onClose={handleCloseModal}>
           <DialogTitle className={classes.title}>
             <Typography align="center">
@@ -53,8 +53,10 @@ function Modal({
           </DialogTitle>
           <DialogContent>
             <Typography className={classes.contents} variant="body1">
-              <div className={classes.content}>이름 :{username}</div>
-              <div>Email :{email}</div>
+              이름 :{username}
+            </Typography>
+            <Typography className={classes.contents} variant="body1">
+              Email :{email}
             </Typography>
 
             <Button
@@ -72,11 +74,7 @@ function Modal({
               className={classes.modalButton}
               size="small"
               variant="contained"
-              onClick={() => {
-                handleSignout();
-                handleCloseModal();
-                history.push('/');
-              }}
+              onClick={handleWithdrawal}
             >
               회원 탈퇴
             </Button>
@@ -85,7 +83,7 @@ function Modal({
       ) : (
         <Dialog open={modal} onClose={handleCloseModal}>
           <DialogTitle className={classes.title}>
-            <Typography variant="h6" align="center">
+            <Typography variant="body1" align="center">
               로그인 먼저 해주세요:)
             </Typography>
           </DialogTitle>
@@ -95,4 +93,4 @@ function Modal({
   );
 }
 
-export default withRouter(Modal);
+export default withRouter(AccountModal);

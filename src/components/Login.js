@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { withRouter } from 'react-router-dom';
-import axios from 'axios';
 
 import { makeStyles } from '@material-ui/core/styles';
 import { createMuiTheme } from '@material-ui/core/styles';
@@ -16,8 +15,6 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-
-axios.defaults.withCredentials = true;
 
 /******************** material-ui/style ************************/
 // style
@@ -70,39 +67,15 @@ const theme = createMuiTheme({
 /***************************************************************/
 
 // Login
-function Login({ handleIsLogin, history, storeCollector }) {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-
-  function handleInputEmail(e) {
-    setEmail(e.target.value);
-  }
-  function handleInputPassword(e) {
-    setPassword(e.target.value);
-  }
-  function handleSubmit() {
-    axios({
-      method: 'post',
-      url: 'http://15.164.164.204:4000/user/signin',
-      data: {
-        email: email,
-        password: password,
-      },
-    })
-      .then((res) => {
-        handleIsLogin();
-        window.sessionStorage.setItem(
-          'login',
-          JSON.stringify({
-            login: true,
-            store: res.data.token,
-          }),
-        );
-        storeCollector();
-      })
-      .catch((err) => alert('회원가입이 필요합니다'));
-  }
-
+function Login({
+  history,
+  email,
+  password,
+  handleInputEmail,
+  handleInputPassword,
+  signInEmailPassword,
+  signInAnonymous,
+}) {
   /*********************************************************************/
 
   const classes = useStyles();
@@ -119,7 +92,10 @@ function Login({ handleIsLogin, history, storeCollector }) {
             <Typography component="h1" variant="h5">
               Sign in
             </Typography>
-            <ValidatorForm className={classes.form} onSubmit={handleSubmit}>
+            <ValidatorForm
+              className={classes.form}
+              onSubmit={signInEmailPassword}
+            >
               <TextValidator
                 variant="outlined"
                 margin="normal"
@@ -153,19 +129,7 @@ function Login({ handleIsLogin, history, storeCollector }) {
                   아직 가입하지 않으셨나요?
                 </Button>
               </Grid>
-              <Grid item xs>
-                <Button
-                  type="submit"
-                  fullWidth
-                  variant="contained"
-                  color="primary"
-                  className={classes.submit}
-                  value="Sign In"
-                  disabled
-                >
-                  Sign In
-                </Button>
-              </Grid>
+
               <Grid item xs>
                 <Button
                   type="submit"
@@ -176,6 +140,19 @@ function Login({ handleIsLogin, history, storeCollector }) {
                   value="Sign In"
                 >
                   Test Sign In
+                </Button>
+              </Grid>
+              <Grid item xs>
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  color="primary"
+                  className={classes.submit}
+                  value="Anonymouse User"
+                  onClick={signInAnonymous}
+                >
+                  Sign In Anonymously
                 </Button>
               </Grid>
             </ValidatorForm>

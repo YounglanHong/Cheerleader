@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { withRouter } from 'react-router-dom';
 
-import Modal from './Modal';
+import AccountModal from './Modal/AccountModal';
 
 import { makeStyles } from '@material-ui/core/styles';
 import { createMuiTheme } from '@material-ui/core/styles';
@@ -16,7 +16,7 @@ import SentimentSatisfiedAltIcon from '@material-ui/icons/SentimentSatisfiedAlt'
 import LockOpenIcon from '@material-ui/icons/LockOpen';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 
-import axios from 'axios';
+import * as firebase from 'firebase/app';
 
 /******************** material-ui/style ************************/
 
@@ -46,24 +46,38 @@ const theme = createMuiTheme({
 });
 /***************************************************************/
 
-function AppBar({ isLogin, username, email, history }) {
-  console.log(isLogin);
-  let [isLogged, setIsLogged] = useState(isLogin);
+function AppBar({ isLogin, isLoginFalse, username, email, history }) {
   const [modal, setModal] = useState(false);
 
+  //* firebase 로그아웃
   function handleLogout() {
-    axios({
-      method: 'post',
-      url: 'http://15.164.164.204:4000/user/logout',
-    });
+    const auth = firebase.auth();
+    auth
+      .signOut()
+      .then(() => {
+        isLoginFalse();
+        history.push('/');
+      })
+      .catch((err) => {
+        alert(err);
+      });
   }
 
-  function handleSignout() {
-    setIsLogged(!isLogin);
-    axios({
-      method: 'post',
-      url: 'http://15.164.164.204:4000/user/withDrawal',
-    });
+  //* firebase 회원탈퇴
+  function handleWithdrawal() {
+    let user = firebase.auth().currentUser;
+
+    user
+      .delete()
+      .then(() => {
+        console.log('Withdrawal');
+        isLoginFalse();
+        history.push('/');
+        setModal(false);
+      })
+      .catch((err) => {
+        alert(err);
+      });
   }
 
   function handleOpenModal() {
@@ -100,17 +114,9 @@ function AppBar({ isLogin, username, email, history }) {
               >
                 Cheerleader
               </Typography>
-              {isLogged ? (
+              {isLogin ? (
                 <Tooltip title="로그 아웃" placement="bottom">
-                  <IconButton
-                    color="inherit"
-                    onClick={() => {
-                      window.sessionStorage.clear(); // 저장된 세션스토리지를 비우고 로그인으로 이동
-                      setIsLogged(false);
-                      handleLogout();
-                      history.push('/');
-                    }}
-                  >
+                  <IconButton color="inherit" onClick={handleLogout}>
                     <LockOpenIcon />
                   </IconButton>
                 </Tooltip>
@@ -126,11 +132,11 @@ function AppBar({ isLogin, username, email, history }) {
                   <AccountCircle />
                 </IconButton>
               </Tooltip>
-              <Modal
-                isLogged={isLogged}
+              <AccountModal
+                isLogin={isLogin}
                 username={username}
                 email={email}
-                handleSignout={handleSignout}
+                handleWithdrawal={handleWithdrawal}
                 modal={modal}
                 handleCloseModal={handleCloseModal}
               />

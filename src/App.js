@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 
 import Login from './components/Login';
 import Signup from './components/Signup';
@@ -7,47 +7,79 @@ import GetMsg from './components/GetMsg';
 import SendMsg from './components/SendMsg';
 import AppBar from './components/AppBar';
 
-import axios from 'axios';
+import * as firebase from 'firebase/app';
 
 // App
-export default function App() {
-  const [isLogin, setIsLogin] = useState(true); // false
-  const [store, setStore] = useState(false);
+function App({ history }) {
+  let [isLogin, setIsLogin] = useState(false); // false
   const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
 
-  console.log(store);
+  // console.log(isLogin);
 
+  // Login
+  useEffect(() => {
+    setEmail('test@testmail.com');
+    setPassword('testpassword');
+    setUsername('testuser');
+  }, [email, password]);
+
+  function handleInputEmail(e) {
+    setEmail(e.target.value);
+  }
+  function handleInputPassword(e) {
+    setPassword(e.target.value);
+  }
+
+  // 로그인 시 로그인 상태 변경
   function handleIsLogin() {
     setIsLogin(true);
   }
 
-  function storeCollector() {
-    // 로그인상태 갱신 메서드
-    let store = JSON.parse(window.sessionStorage.getItem('login'));
-    if (store && store.login) {
-      setStore(store.token);
-      setIsLogin(true);
-    }
+  // 로그아웃, 회원탈퇴 시 로그인 상태 변경
+  function isLoginFalse() {
+    setIsLogin(false);
   }
 
-  useEffect(() => {
-    axios({
-      method: 'get',
-      url: 'http://15.164.164.204:4000/user/info',
-    })
+  //* firebase 이메일 & 패스워드 로그인
+  function signInEmailPassword() {
+    const auth = firebase.auth();
+    auth
+      .createUserWithEmailAndPassword(email, password)
       .then((res) => {
-        setEmail(res.data.email);
-        setUsername(res.data.username);
+        if (res.user.uid) {
+          history.push('/getmsg');
+          handleIsLogin();
+        }
       })
-      .then(() => {
-        storeCollector();
+      .catch((err) => {
+        let errorCode = err.code;
+        let errorMessage = err.message;
+        alert(errorCode, ':', errorMessage);
       });
-  });
+  }
+
+  //* firebase 익명 로그인
+  function signInAnonymous() {
+    const auth = firebase.auth();
+    auth.signInAnonymously().then((res) => {
+      if (res.user.uid) {
+        history.push('/getmsg');
+        handleIsLogin();
+      }
+    });
+  }
 
   return (
     <div className="App">
-      <AppBar isLogin={isLogin} username={username} email={email} />
+      <AppBar
+        isLogin={isLogin}
+        email={email}
+        password={password}
+        username={username}
+        isLoginFalse={isLoginFalse}
+      />
       {isLogin ? (
         <Switch>
           <Route path="/getmsg" render={() => <GetMsg isLogin={isLogin} />} />
@@ -66,9 +98,12 @@ export default function App() {
             path="/"
             render={() => (
               <Login
-                isLogin={isLogin}
-                handleIsLogin={handleIsLogin}
-                storeCollector={storeCollector}
+                email={email}
+                password={password}
+                handleInputEmail={handleInputEmail}
+                handleInputPassword={handleInputPassword}
+                signInEmailPassword={signInEmailPassword}
+                signInAnonymous={signInAnonymous}
               />
             )}
           />
@@ -77,3 +112,5 @@ export default function App() {
     </div>
   );
 }
+
+export default withRouter(App);
