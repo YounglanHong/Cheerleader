@@ -1,0 +1,17 @@
+div.getMsg {
+  text-align: center;
+}
+input.show_msg {
+  width: 500px;
+  height: 200px;
+}
+.to_CheerBtn {
+  width: 120px;
+  height: 40px;
+  margin: 10px;
+  border-radius: 5px;
+  font-size: 15px;
+  font-weight: bold;
+  background-color: lightblue;
+  cursor: pointer;
+}

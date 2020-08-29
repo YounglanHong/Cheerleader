@@ -1,0 +1,38 @@
+.sendMessage {
+  text-align: center;
+}
+
+.header {
+  text-align: center;
+  font-size: 15pt;
+  font-weight: bold;
+  color: grey;
+}
+
+.text {
+  font-size: 20pt;
+  font-family: Consolas, sans-serif;
+  color: grey;
+}
+
+.sendBtn {
+  width: 120px;
+  height: 40px;
+  margin: 10px;
+  border-radius: 5px;
+  font-size: 15px;
+  font-weight: bold;
+  background-color: lightblue;
+  cursor: pointer;
+}
+
+.backBtn {
+  width: 120px;
+  height: 40px;
+  margin: 10px;
+  border-radius: 5px;
+  font-size: 15px;
+  font-weight: bold;
+  background-color: lightblue;
+  cursor: pointer;
+}
