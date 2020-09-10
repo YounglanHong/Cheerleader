@@ -22,7 +22,7 @@
 
 랜덤으로 응원 메세지를 주고 받을 수 있는 서비스를 제공하는 웹 어플리케이션 입니다.
 
-※ 배포 링크: http://cheerleader.s3-website.ap-northeast-2.amazonaws.com
+※ 배포 링크: https://cheerleader-cbe82.web.app/
 
 ### 1. 설치 및 사용 방법
 
