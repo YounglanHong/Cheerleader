@@ -2,6 +2,14 @@
 
 ## 팀 소개
 
+| Member   |     Role      |  GitHub |
+|:----------|:-------------:|:------:|
+|형광석|Front-End|[michael00987](https://github.com/michael00987)|
+|홍영란|Front-End|[YounglanHong](https://github.com/YounglanHong)|
+|박성택|Back-End|[stoic-park](https://github.com/stoic-park)|
+|박성용|Back-End|[Woody-Park](https://github.com/Woody-Park)|
+
+
 [Front-End]
 
 - 형광석
