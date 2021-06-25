@@ -9,17 +9,6 @@
 |박성택|Back-End|[stoic-park](https://github.com/stoic-park)|
 |박성용|Back-End|[Woody-Park](https://github.com/Woody-Park)|
 
-
-[Front-End]
-
-- 형광석
-- 홍영란
-
-[Back-End]
-
-- (팀장) 박성택
-- 박동혁
-
 # 프로젝트명: Cheerleader
 
 ![Cheerleader](./assets/Cheerleader_logo.png)
