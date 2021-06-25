@@ -14,7 +14,7 @@
 
 # 프로젝트명: Cheerleader
 
-![Cheerleader](/cheerleader.png)
+![Cheerleader](/Cheerleader-logo.png)
 
 ## 프로젝트 정보
 
@@ -30,19 +30,19 @@
 
 > 본 레파지토리를 https://github.com/YounglanHong/FirstProject_Cheerleader 주소를 활용하여 로컬 환경에 clone 합니다.
 
-```
+```js
 git clone https://github.com/YounglanHong/FirstProject_Cheerleader
 ```
 
 (2) 패키지 설치
 
-```
+```js
 npm install
 ```
 
 (3) 실행
 
-```
+```js
 // cheerleader-client
 cd client
 npm start
@@ -108,24 +108,24 @@ npm start
 
   - 회원가입
   
-  ![회원가입](./gif/회원가입.gif)
+  ![회원가입](./assets/gif/회원가입.gif)
   
   - 유효성검사
   
-  ![유효성검사](./gif/유효성검사.gif)
+  ![유효성검사](./assets/gif/유효성검사.gif)
   
   - 로그인
   
-  ![로그인](./gif/로그인.gif)
+  ![로그인](./assets/gif/로그인.gif)
   
   - 메세지페이지
   
-  ![메세지페이지](./gif/메세지페이지.gif)
+  ![메세지페이지](./assets/gif/메세지페이지.gif)
 
   - 회원 정보 모달창으로 보기
   - 로그아웃, 회원탈퇴
   
-  ![로그아웃,회원탈퇴](./gif/로그아웃&회원탈퇴.gif)
+  ![로그아웃,회원탈퇴](./assets/gif/로그아웃&회원탈퇴.gif)
   
 
 ### 4. 사용 스택
@@ -146,3 +146,13 @@ npm start
   - AWS - S3
   - AWS - EC2
   - AWS - RDS
+
+***
+
+### 5. Data flow
+
+![Data flow](./assets/Data_Flow_cheer.png)
+
+### 6. Data flow
+
+![Data schema](./assets/DB_Schema_cheer.png)
