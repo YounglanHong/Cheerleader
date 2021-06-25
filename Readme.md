@@ -14,7 +14,7 @@
 
 # 프로젝트명: Cheerleader
 
-![Cheerleader](/Cheerleader-logo.png)
+![Cheerleader](./assets/Cheerleader_logo.png)
 
 ## 프로젝트 정보
 
