@@ -150,6 +150,6 @@ npm start
 
 ![Data flow](./assets/Data_Flow_cheer.png)
 
-### 6. Data flow
+### 6. DB Schema
 
-![Data schema](./assets/DB_Schema_cheer.png)
+![DB schema](./assets/DB_Schema_cheer.png)
